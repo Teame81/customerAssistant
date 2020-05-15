@@ -23,10 +23,13 @@ def handle_client(client):  # Takes client socket as argument.
 
     #Starting a session to DB and start Chat_Session   
     Session = sessionmaker(bind=engine)
-    Session = Session()
-    current_chat_hist = Chat_history(message = "Testar", time_stamp = datetime.datetime.utcnow())
-    current_chat_sess = Chat_session(client_name = "Timmie", operator_name = "Lollo", chat_hist = current_chat_hist)
+    ThisSession = Session()
     
+    current_chat_hist = [Chat_history(message = "Testar", time_stamp = datetime.datetime.utcnow())]
+    current_chat_sess = Chat_session(client_name = "Timmie", operator_name = "Operator121", chat_hist = current_chat_hist)
+    
+    #ThisSession.add(current_chat_sess)
+    #ThisSession.commit()
 
     while True:
         msg = client.recv(BUFSIZ)
@@ -43,7 +46,7 @@ def handle_client(client):  # Takes client socket as argument.
 def broadcast(msg, prefix=""):  # prefix is for name identification.
     for sock in clients:
         sock.send(bytes(prefix, "utf8")+msg)
-        print (msg)
+        print (prefix+str(msg))
         
 
 clients = {}

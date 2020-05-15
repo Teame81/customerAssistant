@@ -5,5 +5,6 @@
             "dialect": "SQLite",
             "name": "theData"
         }
-    ]
+    ],
+    "sqltools.useNodeRuntime": true
 }
